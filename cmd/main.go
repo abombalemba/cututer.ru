@@ -2,13 +2,15 @@ package main
 
 import (
 	"log"
-	"net/http"
-	"database/sql"
-	"time"
-	"encoding/json"
-	"math/rand"
 	"sync"
+	"time"
 	"strings"
+	"net/http"
+	"math/rand"
+	"database/sql"
+	"encoding/json"
+
+	"cututer/internal/models"
 
 	_ "github.com/mattn/go-sqlite3"
 )

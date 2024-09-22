@@ -1,4 +1,4 @@
-module cututer
+module updaterDB
 
 go 1.21.0
 
