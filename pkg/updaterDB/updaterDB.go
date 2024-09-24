@@ -34,29 +34,3 @@ func main() {
 		}
 	}
 }
-
-func initDB() {
-	var err error
-
-	db, err := sql.Open("sqlite3", "../../database/urls.db")
-	if err != nil {
-		log.Fatalf("initDB failed because %v", err)
-		return
-	}
-
-	createTableSQL := `
-	CREATE TABLE IF NOT EXISTS urls (
-		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		original_url TEXT NOT NULL,
-		short_url TEXT NOT NULL UNIQUE
-	);
-	`
-
-	_, err = db.Exec(createTableSQL)
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
-
-	log.Println("initDB successfully executed")
-}

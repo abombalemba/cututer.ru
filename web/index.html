@@ -46,6 +46,30 @@
             }
         });
     </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const shortUrlOutput = document.getElementById('shortUrlOutput');
+        const copyButton = document.getElementById('copyButton');
+
+        // Функция для проверки наличия текста и копирования в буфер обмена
+        function copyToClipboard() {
+            if (shortUrlOutput.value) {
+                navigator.clipboard.writeText(shortUrlOutput.value);
+                copyButton.disabled = false;
+            } else {
+                copyButton.disabled = true;
+            }
+        }
+
+        // Обработчик события на изменение значения поля
+        shortUrlOutput.addEventListener('change', () => {
+            copyToClipboard();
+        });
+
+        // Сразу проверить значение при загрузке страницы
+        copyToClipboard();
+    });
+</script>
 </head>
 <body>
     <h1>Сократитель ссылок</h1>
@@ -56,7 +80,9 @@
     </form>
     <br>
     <label for="shortUrlOutput">Сокращенная ссылка:</label><br>
+
     <input type="text" id="shortUrlOutput" readonly><br>
-    <button id="copyButton" onclick="copyToClipboard(document.getElementById('shortUrlOutput').value)">Копировать</button>
+    <button id="copyButton" disabled>Копировать</button>
+</div>
 </body>
 </html>

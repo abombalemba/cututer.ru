@@ -1,6 +1,9 @@
 package main
 
 import (
+	//"bytes"
+	//"image"
+	//"image/gif"
 	"log"
 	"sync"
 	"time"
@@ -10,9 +13,12 @@ import (
 	"database/sql"
 	"encoding/json"
 
+	"cututer/internal/config"
 	"cututer/internal/models"
+	//"cututer/database"
 
 	_ "github.com/mattn/go-sqlite3"
+	favicon "github.com/go-http-utils/favicon"
 )
 
 var (
@@ -20,35 +26,26 @@ var (
 	mu sync.Mutex
 )
 
-const (
-	protocol = "http://"
-	host = "localhost"
-	port = "8080"
-	path = "/c/"
-
-	lengthShortUrl = 3
-	letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-)
-
-type UrlRequest struct {
-	OriginalUrl string `json:"original_url"`
-}
-
-type UrlResponse struct {
-	ShortUrl string `json:"short_url"`
-}
-
 func main() {
-	initDB()
+	InitDB()
 	defer db.Close()
-
+	/*
 	http.HandleFunc("/", indexUrlHandler)
 	http.HandleFunc("/api", apiUrlHandler)
 	http.HandleFunc("/c/", cUrlHandler)
+	//http.HandleFunc("/favicon.ico", faviconHandler)
 
-	if err := http.ListenAndServe(":" + port, nil); err != nil {
+	if err := http.ListenAndServe(":" + config.Port, favicon.Handler()); err != nil {
 		panic(err)
-	}
+	}*/
+
+	mux := http.NewServeMux()
+
+	mux.HandleFunc("/", indexUrlHandler)
+	mux.HandleFunc("/api", apiUrlHandler)
+	mux.HandleFunc("/c/", cUrlHandler)
+
+	http.ListenAndServe(":" + config.Port, favicon.Handler(mux, "../web/favicon/32x32.ico"))
 }
 
 func generateShortUrl(originalUrl string) string {
@@ -68,10 +65,10 @@ func generateShortUrl(originalUrl string) string {
 
 func generateRandomString() string {
 	rand.Seed(time.Now().UnixNano())
-	str := make([]byte, lengthShortUrl)
+	str := make([]byte, config.LengthShortUrl)
 
 	for i := range str {
-		str[i] = letters[rand.Intn(len(letters))]
+		str[i] = config.Letters[rand.Intn(len(config.Letters))]
 	}
 
 	return string(str)
@@ -81,58 +78,37 @@ func checkGeneratedShortUrl(shortUrl string) {
 
 }
 
-func initDB() {
-	var err error
-
-	db, err = sql.Open("sqlite3", "../database/urls.db")
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
-
-	createTableSQL := `
-	CREATE TABLE IF NOT EXISTS urls (
-		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		original_url TEXT NOT NULL,
-		short_url TEXT NOT NULL UNIQUE
-	);
-	`
-
-	_, err = db.Exec(createTableSQL)
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
-
-	log.Println("initDB successfully executed")
-}
-
 func indexUrlHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("indexUrlHandler successfully started")
+
+	w.Header().Set("Content-Type", "image/jpeg")
 	http.ServeFile(w, r, "../web/index.html")
 
 	log.Println("indexUrlHandler successfully executed")
 }
 
 func apiUrlHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("apiUrlHandler successfully started")
+
 	if r.Method != http.MethodPost {
-		log.Fatalf("apiUrlHandler failed because another method not allowed", r.Method)
 		http.Error(w, "apiUrlHandler failed because another method not allowed", http.StatusMethodNotAllowed)
+		log.Fatalf("apiUrlHandler failed because another method not allowed", r.Method)
 		return
 	}
 
-	var req UrlRequest
+	var req models.UrlRequest
 
 	if err := r.ParseForm(); err != nil {
-		log.Fatalf("apiUrlHandler failed because there was a parsing error", err)
 		http.Error(w, "apiUrlHandler failed because there was a parsing error", http.StatusBadRequest)
+		log.Fatalf("apiUrlHandler failed because there was a parsing error", err)
 		return
 	}
 
 	req.OriginalUrl = r.FormValue("original_url")
 
 	if req.OriginalUrl == "" {
-		log.Fatalf("apiUrlHandler failed because req.OriginalUrl = \"\"")
 		http.Error(w, "apiUrlHandler failed because req.OriginalUrl = \"\"", http.StatusBadRequest)
+		log.Fatalf("apiUrlHandler failed because req.OriginalUrl = \"\"")
 		return
 	}
 
@@ -141,8 +117,8 @@ func apiUrlHandler(w http.ResponseWriter, r *http.Request) {
 
 	is, err := originalUrlInDB(req.OriginalUrl)
 	if err != nil {
-		log.Fatalf("apiUrlHandler failed because SQL query got error 142", err)
 		http.Error(w, "apiUrlHandler failed because SQL query got error 142", http.StatusBadRequest)
+		log.Fatalf("apiUrlHandler failed because SQL query got error 142", err)
 		return
 	}
 
@@ -154,8 +130,8 @@ func apiUrlHandler(w http.ResponseWriter, r *http.Request) {
 		err := row.Scan(&shortUrl)
 
 		if err != nil {
-			log.Fatalf("apiUrlHandler failed because SQL query got error 155")
 			http.Error(w, "apiUrlHandler failed because SQL query got error 155", http.StatusBadRequest)
+			log.Fatalf("apiUrlHandler failed because SQL query got error 155")
 			return
 		}
 	} else {
@@ -165,15 +141,15 @@ func apiUrlHandler(w http.ResponseWriter, r *http.Request) {
 			"INSERT INTO urls (original_url, short_url) VALUES (?, ?)", req.OriginalUrl, shortUrl)
 
 		if err != nil {
-			log.Fatalf("apiUrlHandler failed because SQL query got error 164", err)
 			http.Error(w, "apiUrlHandler failed because SQL query got error", http.StatusInternalServerError)
+			log.Fatalf("apiUrlHandler failed because SQL query got error 164", err)
 			return
 		}
 	}
 
-	shortUrl = protocol + host + ":" + port + path + shortUrl
+	shortUrl = config.Protocol + config.Host + ":" + config.Port + config.Path + shortUrl
 
-	response := UrlResponse{ShortUrl: shortUrl}
+	response := models.UrlResponse{ShortUrl: shortUrl}
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(response)
@@ -182,6 +158,8 @@ func apiUrlHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func cUrlHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("cUrlHandler successfully started")
+
 	path := r.URL.Path
 	path = strings.TrimPrefix(path, "/c/")
 
@@ -226,4 +204,32 @@ func originalUrlInDB(originalUrl string) (bool, error) {
 		return false, nil
 	}
 	return true, nil
+}
+
+func InitDB() {
+	log.Println("initDB successfully started")
+
+	var err error
+
+	db, err = sql.Open("sqlite3", "../database/urls.db")
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
+
+	createTableSQL := `
+	CREATE TABLE IF NOT EXISTS urls (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		original_url TEXT NOT NULL,
+		short_url TEXT NOT NULL UNIQUE
+	);
+	`
+
+	_, err = db.Exec(createTableSQL)
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
+
+	log.Println("initDB successfully executed")
 }
