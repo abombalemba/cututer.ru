@@ -4,16 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Сократитель ссылок</title>
-    <style>
-        #copyButton {
-            background-color: lightblue;
-            border: none;
-            color: white;
-            padding: 10px 15px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-    </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $(function() {
@@ -46,43 +36,17 @@
             }
         });
     </script>
-    <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const shortUrlOutput = document.getElementById('shortUrlOutput');
-        const copyButton = document.getElementById('copyButton');
-
-        // Функция для проверки наличия текста и копирования в буфер обмена
-        function copyToClipboard() {
-            if (shortUrlOutput.value) {
-                navigator.clipboard.writeText(shortUrlOutput.value);
-                copyButton.disabled = false;
-            } else {
-                copyButton.disabled = true;
-            }
-        }
-
-        // Обработчик события на изменение значения поля
-        shortUrlOutput.addEventListener('change', () => {
-            copyToClipboard();
-        });
-
-        // Сразу проверить значение при загрузке страницы
-        copyToClipboard();
-    });
-</script>
 </head>
 <body>
     <h1>Сократитель ссылок</h1>
     <form id="linkForm" action="/api" method="POST">
         <label for="original_url">Введите ссылку:</label><br>
         <input type="text" id="original_url" name="original_url" required><br><br>
-        <button type="submit">Сократить ссылку</button>
+        <button type="submit">Сократить ссылку</button><br><br>
     </form>
-    <br>
     <label for="shortUrlOutput">Сокращенная ссылка:</label><br>
-
-    <input type="text" id="shortUrlOutput" readonly><br>
-    <button id="copyButton" disabled>Копировать</button>
+    <input type="text" id="shortUrlOutput" readonly><br><br>
+    <button id="copyButton">Копировать</button>
 </div>
 </body>
 </html>

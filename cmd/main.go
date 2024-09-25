@@ -1,9 +1,6 @@
 package main
 
 import (
-	//"bytes"
-	//"image"
-	//"image/gif"
 	"log"
 	"sync"
 	"time"
@@ -18,7 +15,7 @@ import (
 	//"cututer/database"
 
 	_ "github.com/mattn/go-sqlite3"
-	favicon "github.com/go-http-utils/favicon"
+	//favicon "github.com/go-http-utils/favicon"
 )
 
 var (
@@ -29,24 +26,15 @@ var (
 func main() {
 	InitDB()
 	defer db.Close()
-	/*
+	
 	http.HandleFunc("/", indexUrlHandler)
 	http.HandleFunc("/api", apiUrlHandler)
 	http.HandleFunc("/c/", cUrlHandler)
-	//http.HandleFunc("/favicon.ico", faviconHandler)
 
-	if err := http.ListenAndServe(":" + config.Port, favicon.Handler()); err != nil {
-		panic(err)
-	}*/
-
-	mux := http.NewServeMux()
-
-	mux.HandleFunc("/", indexUrlHandler)
-	mux.HandleFunc("/api", apiUrlHandler)
-	mux.HandleFunc("/c/", cUrlHandler)
-
-	http.ListenAndServe(":" + config.Port, favicon.Handler(mux, "../web/favicon/32x32.ico"))
-}
+	if err := http.ListenAndServe(":" + config.Port, nil); err != nil {
+		log.Panicln(err)
+	}
+};
 
 func generateShortUrl(originalUrl string) string {
 	str := generateRandomString()
@@ -81,7 +69,6 @@ func checkGeneratedShortUrl(shortUrl string) {
 func indexUrlHandler(w http.ResponseWriter, r *http.Request) {
 	log.Println("indexUrlHandler successfully started")
 
-	w.Header().Set("Content-Type", "image/jpeg")
 	http.ServeFile(w, r, "../web/index.html")
 
 	log.Println("indexUrlHandler successfully executed")
@@ -92,7 +79,7 @@ func apiUrlHandler(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method != http.MethodPost {
 		http.Error(w, "apiUrlHandler failed because another method not allowed", http.StatusMethodNotAllowed)
-		log.Fatalf("apiUrlHandler failed because another method not allowed", r.Method)
+		log.Println("apiUrlHandler failed because another method not allowed", r.Method)
 		return
 	}
 
@@ -100,7 +87,7 @@ func apiUrlHandler(w http.ResponseWriter, r *http.Request) {
 
 	if err := r.ParseForm(); err != nil {
 		http.Error(w, "apiUrlHandler failed because there was a parsing error", http.StatusBadRequest)
-		log.Fatalf("apiUrlHandler failed because there was a parsing error", err)
+		log.Println("apiUrlHandler failed because there was a parsing error", err)
 		return
 	}
 
@@ -108,7 +95,7 @@ func apiUrlHandler(w http.ResponseWriter, r *http.Request) {
 
 	if req.OriginalUrl == "" {
 		http.Error(w, "apiUrlHandler failed because req.OriginalUrl = \"\"", http.StatusBadRequest)
-		log.Fatalf("apiUrlHandler failed because req.OriginalUrl = \"\"")
+		log.Println("apiUrlHandler failed because req.OriginalUrl = \"\"")
 		return
 	}
 
@@ -118,7 +105,7 @@ func apiUrlHandler(w http.ResponseWriter, r *http.Request) {
 	is, err := originalUrlInDB(req.OriginalUrl)
 	if err != nil {
 		http.Error(w, "apiUrlHandler failed because SQL query got error 142", http.StatusBadRequest)
-		log.Fatalf("apiUrlHandler failed because SQL query got error 142", err)
+		log.Println("apiUrlHandler failed because SQL query got error 142", err)
 		return
 	}
 
@@ -131,7 +118,7 @@ func apiUrlHandler(w http.ResponseWriter, r *http.Request) {
 
 		if err != nil {
 			http.Error(w, "apiUrlHandler failed because SQL query got error 155", http.StatusBadRequest)
-			log.Fatalf("apiUrlHandler failed because SQL query got error 155")
+			log.Println("apiUrlHandler failed because SQL query got error 155")
 			return
 		}
 	} else {
@@ -142,7 +129,7 @@ func apiUrlHandler(w http.ResponseWriter, r *http.Request) {
 
 		if err != nil {
 			http.Error(w, "apiUrlHandler failed because SQL query got error", http.StatusInternalServerError)
-			log.Fatalf("apiUrlHandler failed because SQL query got error 164", err)
+			log.Println("apiUrlHandler failed because SQL query got error 164", err)
 			return
 		}
 	}
@@ -181,7 +168,7 @@ func cUrlHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		http.Error(w, "cUrlHandler failed because SQL query got error", http.StatusBadRequest)
 
-		log.Fatalf("cUrlHandler failed because SQL query got error", err)
+		log.Println("cUrlHandler failed because SQL query got error", err)
 	}
 }
 
