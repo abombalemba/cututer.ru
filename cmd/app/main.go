@@ -66,15 +66,12 @@ func generateShortUrl(originalUrl string) string {
 	for {
 		str = services.GenerateRandomString()
 
-		checkUrlSQL := `
-		SELECT COUNT(*) FROM urls WHERE short_url == ?
-		`
-
-		row := db.QueryRow(checkUrlSQL, str)
+		row := db.QueryRow(models.CheckUrlSQL, str)
 		var n int
 		err := row.Scan(&n)
 		if err != nil {
 			logger.Fatalf("error or this short is existing", err)
+			logger.Printf("SELECT COUNT(*) FROM urls WHERE short_url == %s\n", str)
 		}
 
 		if n == 0 {
@@ -123,8 +120,9 @@ func apiUrlHandler(w http.ResponseWriter, r *http.Request) {
 
 	is, err := originalUrlInDB(req.OriginalUrl)
 	if err != nil {
-		http.Error(w, "apiUrlHandler failed because SQL query got error 142", http.StatusBadRequest)
-		logger.Println("apiUrlHandler failed because SQL query got error 142", err)
+		http.Error(w, "apiUrlHandler failed because SQL SELECT COPY ORIGINAL URL query got error", http.StatusBadRequest)
+		logger.Println("apiUrlHandler failed because SQL SELECT COPY ORIGINAL URL query got error", err)
+		logger.Printf("SELECT id FROM urls WHERE original_url == %s\n", req.OriginalUrl)
 		return
 	}
 
@@ -136,19 +134,22 @@ func apiUrlHandler(w http.ResponseWriter, r *http.Request) {
 		err := row.Scan(&shortUrl)
 
 		if err != nil {
-			http.Error(w, "apiUrlHandler failed because SQL query got error 155", http.StatusBadRequest)
-			logger.Println("apiUrlHandler failed because SQL query got error 155")
+			http.Error(w, "apiUrlHandler failed because SQL SELECT COPY ORIGINAL URL query got error", http.StatusBadRequest)
+			logger.Println("apiUrlHandler failed because SQL SELECT COPY ORIGINAL URL query got error", err)
+			logger.Printf("SELECT short_url FROM urls WHERE original_url == %s\n", req.OriginalUrl)
 			return
 		}
 	} else {
 		shortUrl = generateShortUrl(req.OriginalUrl)
+		now := tools.GetNow()
 
 		_, err := db.Exec(
-			"INSERT INTO urls (original_url, short_url) VALUES (?, ?)", req.OriginalUrl, shortUrl)
+			"INSERT INTO urls (original_url, short_url, spawn_date) VALUES (?, ?, ?)", req.OriginalUrl, shortUrl, now)
 
 		if err != nil {
-			http.Error(w, "apiUrlHandler failed because SQL query got error", http.StatusInternalServerError)
-			logger.Println("apiUrlHandler failed because SQL query got error 164", err)
+			http.Error(w, "apiUrlHandler failed because SQL INSERT NEW URL query got error", http.StatusInternalServerError)
+			logger.Println("apiUrlHandler failed because SQL INSERT NEW URL query got error", err)
+			logger.Printf("INSERT INTO urls (original_url, short_url, spawn_date) VALUES (%s, %s, %s)\n", req.OriginalUrl, shortUrl, now)
 			return
 		}
 	}
@@ -188,6 +189,7 @@ func cUrlHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "cUrlHandler failed because SQL query got error", http.StatusBadRequest)
 
 		logger.Println("cUrlHandler failed because SQL query got error", err)
+		logger.Printf("SELECT original_url FROM urls WHERE short_url == %s LIMIT 1\n", path)
 	}
 }
 
@@ -223,15 +225,7 @@ func InitDB() {
 		return
 	}
 
-	createTableSQL := `
-	CREATE TABLE IF NOT EXISTS urls (
-		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		original_url TEXT NOT NULL,
-		short_url TEXT NOT NULL UNIQUE
-	);
-	`
-
-	_, err = db.Exec(createTableSQL)
+	_, err = db.Exec(models.CreateTableSQL)
 	if err != nil {
 		logger.Fatal(err)
 		return

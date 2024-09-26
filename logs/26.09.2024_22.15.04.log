@@ -1,0 +1,16 @@
+2024/09/26 22:15:04.290653 main.go:216: initDB successfully started
+2024/09/26 22:15:04.292779 main.go:232: initDB successfully executed
+2024/09/26 22:15:09.402848 main.go:89: indexUrlHandler successfully started
+2024/09/26 22:15:09.402848 main.go:93: indexUrlHandler successfully executed
+2024/09/26 22:15:09.527602 main.go:89: indexUrlHandler successfully started
+2024/09/26 22:15:09.528350 main.go:93: indexUrlHandler successfully executed
+2024/09/26 22:15:34.330965 main.go:97: apiUrlHandler successfully started
+2024/09/26 22:15:34.337234 main.go:163: apiUrlHandler successfully executed
+2024/09/26 22:15:36.518124 main.go:167: cUrlHandler successfully started
+2024/09/26 22:15:36.518124 main.go:182: cUrlHandler successfully executed
+2024/09/26 22:16:03.626322 main.go:97: apiUrlHandler successfully started
+2024/09/26 22:16:03.632046 main.go:163: apiUrlHandler successfully executed
+2024/09/26 22:16:08.331444 main.go:167: cUrlHandler successfully started
+2024/09/26 22:16:08.332951 main.go:182: cUrlHandler successfully executed
+2024/09/26 22:16:08.378611 main.go:167: cUrlHandler successfully started
+2024/09/26 22:16:08.469702 main.go:186: cUrlHandler not found url

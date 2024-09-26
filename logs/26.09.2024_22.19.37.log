@@ -1,0 +1,4 @@
+2024/09/26 22:19:37.402484 main.go:216: initDB successfully started
+2024/09/26 22:19:37.408788 main.go:232: initDB successfully executed
+2024/09/26 22:20:07.209120 main.go:97: apiUrlHandler successfully started
+2024/09/26 22:20:07.210895 main.go:151: apiUrlHandler failed because SQL query got error 164 NOT NULL constraint failed: urls.spawn_date
