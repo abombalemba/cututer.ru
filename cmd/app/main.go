@@ -4,17 +4,16 @@ import (
 	"os"
 	"log"
 	"sync"
-	"time"
 	"bytes"
 	"strings"
 	"net/http"
-	"math/rand"
 	"database/sql"
 	"encoding/json"
 
 	//"cututer/database"
 	"cututer/internal/config"
 	"cututer/internal/models"
+	"cututer/internal/services"
 	"cututer/tools"
 
 	_ "github.com/mattn/go-sqlite3"
@@ -62,33 +61,28 @@ func createLogger() {
 }
 
 func generateShortUrl(originalUrl string) string {
-	str := generateRandomString()
+	var str string
 
-	checkUrlSQL := `
-	SELECT COUNT(*) FROM urls WHERE short_url == ?
-	`
+	for {
+		str = services.GenerateRandomString()
 
-	res, err := db.Exec(checkUrlSQL, str)
-	if err != nil {
-		logger.Fatalf("error or this short is existing", res, err)
+		checkUrlSQL := `
+		SELECT COUNT(*) FROM urls WHERE short_url == ?
+		`
+
+		row := db.QueryRow(checkUrlSQL, str)
+		var n int
+		err := row.Scan(&n)
+		if err != nil {
+			logger.Fatalf("error or this short is existing", err)
+		}
+
+		if n == 0 {
+			break
+		}
 	}
 
 	return str
-}
-
-func generateRandomString() string {
-	rand.Seed(time.Now().UnixNano())
-	str := make([]byte, config.LengthShortUrl)
-
-	for i := range str {
-		str[i] = config.Letters[rand.Intn(len(config.Letters))]
-	}
-
-	return string(str)
-}
-
-func checkGeneratedShortUrl(shortUrl string) {
-
 }
 
 func indexUrlHandler(w http.ResponseWriter, r *http.Request) {
