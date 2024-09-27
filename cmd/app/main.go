@@ -115,6 +115,12 @@ func apiUrlHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if !strings.Contains(req.OriginalUrl, "://") {
+		http.Error(w, "apiUrlHandler failed because req.OriginalUrl does not contains ://", http.StatusBadRequest)
+		logger.Println("apiUrlHandler failed because req.OriginalUrl does not contains ://", req.OriginalUrl)
+		return
+	}
+
 	mu.Lock()
 	defer mu.Unlock()
 

@@ -1,0 +1,24 @@
+2024/09/27 14:31:54.576123 main.go:224: initDB successfully started
+2024/09/27 14:31:54.581977 main.go:240: initDB successfully executed
+2024/09/27 14:31:54.638654 main.go:86: indexUrlHandler successfully started
+2024/09/27 14:31:54.651545 main.go:90: indexUrlHandler successfully executed
+2024/09/27 14:31:54.725901 main.go:86: indexUrlHandler successfully started
+2024/09/27 14:31:54.726651 main.go:90: indexUrlHandler successfully executed
+2024/09/27 14:31:57.093477 main.go:86: indexUrlHandler successfully started
+2024/09/27 14:31:57.217447 main.go:90: indexUrlHandler successfully executed
+2024/09/27 14:32:04.861465 main.go:94: apiUrlHandler successfully started
+2024/09/27 14:32:04.861806 main.go:120: apiUrlHandler failed because req.OriginalUrl does not contains :// wr4etyujkiop
+2024/09/27 14:32:28.233107 main.go:94: apiUrlHandler successfully started
+2024/09/27 14:32:28.236525 main.go:170: apiUrlHandler successfully executed
+2024/09/27 14:32:31.544730 main.go:174: cUrlHandler successfully started
+2024/09/27 14:32:31.545734 main.go:189: cUrlHandler successfully executed
+2024/09/27 14:34:06.683101 main.go:94: apiUrlHandler successfully started
+2024/09/27 14:34:06.683101 main.go:120: apiUrlHandler failed because req.OriginalUrl does not contains :// vk.com
+2024/09/27 14:34:17.149317 main.go:94: apiUrlHandler successfully started
+2024/09/27 14:34:17.214300 main.go:120: apiUrlHandler failed because req.OriginalUrl does not contains :// vk.com
+2024/09/27 14:34:17.421965 main.go:94: apiUrlHandler successfully started
+2024/09/27 14:34:17.491839 main.go:120: apiUrlHandler failed because req.OriginalUrl does not contains :// vk.com
+2024/09/27 14:34:43.748949 main.go:86: indexUrlHandler successfully started
+2024/09/27 14:34:43.749471 main.go:90: indexUrlHandler successfully executed
+2024/09/27 14:34:51.190652 main.go:94: apiUrlHandler successfully started
+2024/09/27 14:34:51.282115 main.go:120: apiUrlHandler failed because req.OriginalUrl does not contains :// ploi
