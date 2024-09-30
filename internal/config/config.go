@@ -2,10 +2,10 @@ package config
 
 const (
 	Protocol = "http://"
-	Host = "localhost"
+	Host = "192.168.0.175"
 	Port = "8080"
 	Path = "/c/"
 
 	LengthShortUrl = 3
-	Letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	Letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 )

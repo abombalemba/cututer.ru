@@ -1,0 +1,4 @@
+2024/09/27 14:51:46.237961 main.go:224: initDB successfully started
+2024/09/27 14:51:46.240034 main.go:240: initDB successfully executed
+2024/09/27 14:51:48.594650 main.go:86: indexUrlHandler successfully started
+2024/09/27 14:51:48.697993 main.go:90: indexUrlHandler successfully executed

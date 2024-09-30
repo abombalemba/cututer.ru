@@ -5,14 +5,23 @@ import (
 	//"time"
 	"database/sql"
 
+	pkg_logger "cututer/pkg/logger"
+
 	_ "github.com/mattn/go-sqlite3"
 )
 
 var (
 	db *sql.DB
+	logger *log.Logger
 )
 
+func init() {
+	pkg_logger.CreateLogger()
+	logger = pkg_logger.GetLogger()
+}
+
 func main() {
+	logger.Println("updaterDB successfully started")
 	initDB()
 	defer db.Close()
 
@@ -22,7 +31,7 @@ func main() {
 		)
 
 		if err != nil {
-			log.Fatal("initDB failed because %v", err)
+			logger.Println("initDB failed because %v", err)
 			return
 		}
 

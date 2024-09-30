@@ -1,7 +1,6 @@
 package main
 
 import (
-	"os"
 	"log"
 	"sync"
 	"bytes"
@@ -15,6 +14,7 @@ import (
 	"cututer/internal/models"
 	"cututer/internal/services"
 	"cututer/tools"
+	pkg_logger "cututer/pkg/logger"
 
 	_ "github.com/mattn/go-sqlite3"
 	//favicon "github.com/go-http-utils/favicon"
@@ -25,18 +25,18 @@ var (
 	mu sync.Mutex
 	buffer bytes.Buffer
 	logger *log.Logger
-	fileLog *os.File
 )
 
 func init() {
-	createLogger()
+	pkg_logger.CreateLogger()
+	logger = pkg_logger.GetLogger()
 }
 
 func main() {
 	InitDB()
 
 	defer db.Close()
-	defer fileLog.Close()
+	defer pkg_logger.CloseLogger()
 	
 	http.HandleFunc("/", indexUrlHandler)
 	http.HandleFunc("/api", apiUrlHandler)
@@ -45,19 +45,6 @@ func main() {
 	if err := http.ListenAndServe(":" + config.Port, nil); err != nil {
 		logger.Panicln(err)
 	}
-}
-
-func createLogger() {
-	filename := tools.GetNow()
-
-	fileLog, err := os.OpenFile("../../logs/" + filename + ".log", os.O_CREATE | os.O_WRONLY, 0666)
-	if err != nil {
-		log.Fatalln(err)
-		return
-	}
-
-	logger = log.New(&buffer, "", log.Ldate | log.Ltime | log.Lmicroseconds | log.Lshortfile)
-	logger.SetOutput(fileLog)
 }
 
 func generateShortUrl(originalUrl string) string {
