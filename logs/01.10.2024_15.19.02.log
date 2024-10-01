@@ -1,0 +1,13 @@
+2024/10/01 15:19:02.210374 database.go:41: initDB successfully executed
+2024/10/01 15:19:22.170715 main.go:75: indexUrlHandler successfully started
+2024/10/01 15:19:22.170986 main.go:79: indexUrlHandler successfully executed
+2024/10/01 15:19:35.973907 main.go:163: cUrlHandler successfully started
+2024/10/01 15:19:35.975274 main.go:178: cUrlHandler successfully executed
+2024/10/01 15:21:18.946253 main.go:83: apiUrlHandler successfully started
+2024/10/01 15:21:18.946345 main.go:109: apiUrlHandler failed because req.OriginalUrl does not contains :// http
+2024/10/01 15:21:38.759325 main.go:83: apiUrlHandler successfully started
+2024/10/01 15:21:38.775148 main.go:159: apiUrlHandler successfully executed
+2024/10/01 15:21:47.982951 main.go:163: cUrlHandler successfully started
+2024/10/01 15:21:47.983953 main.go:178: cUrlHandler successfully executed
+2024/10/01 15:24:30.125240 main.go:75: indexUrlHandler successfully started
+2024/10/01 15:24:30.125780 main.go:79: indexUrlHandler successfully executed

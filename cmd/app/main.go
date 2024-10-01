@@ -8,9 +8,9 @@ import (
 	"net/http"
 	"database/sql"
 	"encoding/json"
-
-	//"cututer/database"
+	
 	"cututer/internal/config"
+	intr_database "cututer/internal/database"
 	"cututer/internal/models"
 	"cututer/internal/services"
 	"cututer/tools"
@@ -28,13 +28,14 @@ var (
 )
 
 func init() {
-	pkg_logger.CreateLogger()
+	pkg_logger.InitLogger()
 	logger = pkg_logger.GetLogger()
+
+	intr_database.InitDB()
+	db = intr_database.GetDB()
 }
 
 func main() {
-	InitDB()
-
 	defer db.Close()
 	defer pkg_logger.CloseLogger()
 	
@@ -206,7 +207,7 @@ func originalUrlInDB(originalUrl string) (bool, error) {
 	}
 	return true, nil
 }
-
+/*
 func InitDB() {
 	logger.Println("initDB successfully started")
 
@@ -225,4 +226,4 @@ func InitDB() {
 	}
 
 	logger.Println("initDB successfully executed")
-}
+}*/

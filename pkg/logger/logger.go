@@ -12,7 +12,7 @@ var (
 	fileLog *os.File
 )
 
-func CreateLogger() {
+func InitLogger() {
 	filename := tools.GetNow()
 
 	fileLog, err := os.OpenFile("../../logs/" + filename + ".log", os.O_CREATE | os.O_WRONLY, 0666)

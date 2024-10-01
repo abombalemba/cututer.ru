@@ -12,7 +12,7 @@ func GenerateRandomString() string {
 	str := make([]byte, config.LengthShortUrl)
 
 	for i := range str {
-		str[i] = config.Letters[rand.Intn(len(config.Letters))]
+		str[i] = config.Symbols[rand.Intn(len(config.Symbols))]
 	}
 
 	return string(str)
