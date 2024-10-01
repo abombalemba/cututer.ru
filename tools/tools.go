@@ -6,5 +6,5 @@ import (
 
 func GetNow() string {
 	now := time.Now()
-	return now.Format("02.01.2006_15.04.05")
+	return now.Format("2006.01.02T15.04.05")
 }
