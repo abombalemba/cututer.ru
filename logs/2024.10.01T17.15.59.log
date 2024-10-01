@@ -1,0 +1,22 @@
+2024/10/01 17:15:59.794859 logger.go:26: initLogger successfully executed
+2024/10/01 17:15:59.795390 database.go:20: initDB successfully started
+2024/10/01 17:15:59.796962 database.go:44: initDB successfully executed
+2024/10/01 17:15:59.940774 handler_index.go:14: indexUrlHandler successfully started
+2024/10/01 17:15:59.941323 handler_index.go:18: indexUrlHandler successfully executed
+2024/10/01 17:16:09.378756 handler_api.go:25: apiUrlHandler successfully started
+2024/10/01 17:16:09.379291 functions.go:57: originalUrlInDB successfully started
+2024/10/01 17:16:09.379809 functions.go:78: originalUrlInDB successfully executed with true and nil
+2024/10/01 17:16:09.380324 handler_api.go:101: apiUrlHandler successfully executed
+2024/10/01 17:16:12.623963 handler_c.go:17: cUrlHandler successfully started
+2024/10/01 17:16:12.624509 handler_c.go:32: cUrlHandler successfully executed
+2024/10/01 17:16:17.718419 handler_api.go:25: apiUrlHandler successfully started
+2024/10/01 17:16:17.718419 functions.go:57: originalUrlInDB successfully started
+2024/10/01 17:16:17.718957 functions.go:67: originalUrlInDB successfully executed with false and nil
+2024/10/01 17:16:17.718957 functions.go:32: generateShortUrl successfully started
+2024/10/01 17:16:17.719491 functions.go:50: generateShortUrl successfully executed
+2024/10/01 17:16:17.719491 functions.go:51: generateShortUrl generated new url - Cfu
+2024/10/01 17:16:17.722081 handler_api.go:101: apiUrlHandler successfully executed
+2024/10/01 17:16:22.459179 handler_c.go:17: cUrlHandler successfully started
+2024/10/01 17:16:22.558129 handler_c.go:36: cUrlHandler not found url
+2024/10/01 17:16:24.853272 handler_index.go:14: indexUrlHandler successfully started
+2024/10/01 17:16:24.855035 handler_index.go:18: indexUrlHandler successfully executed

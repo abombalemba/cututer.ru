@@ -1,0 +1,10 @@
+2024/10/01 16:23:20.177281 logger.go:26: initLogger successfully executed
+2024/10/01 16:23:20.178284 database.go:20: initDB successfully started
+2024/10/01 16:23:20.180823 database.go:44: initDB successfully executed
+2024/10/01 16:23:26.137061 main.go:52: indexUrlHandler successfully started
+2024/10/01 16:23:26.137061 main.go:56: indexUrlHandler successfully executed
+2024/10/01 16:23:34.396775 main.go:60: apiUrlHandler successfully started
+2024/10/01 16:23:34.397852 functions.go:27: generateShortUrl successfully started
+2024/10/01 16:23:34.398392 functions.go:45: generateShortUrl successfully executed
+2024/10/01 16:23:34.398928 functions.go:46: generateShortUrl generated new url -  DNX
+2024/10/01 16:23:34.401526 main.go:136: apiUrlHandler successfully executed

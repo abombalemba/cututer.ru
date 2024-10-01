@@ -1,0 +1,9 @@
+2024/10/01 17:09:00.778680 logger.go:26: initLogger successfully executed
+2024/10/01 17:09:00.779242 database.go:20: initDB successfully started
+2024/10/01 17:09:00.780796 database.go:44: initDB successfully executed
+2024/10/01 17:09:21.427729 handler_index.go:14: indexUrlHandler successfully started
+2024/10/01 17:09:21.428759 handler_index.go:18: indexUrlHandler successfully executed
+2024/10/01 17:09:37.293734 handler_api.go:25: apiUrlHandler successfully started
+2024/10/01 17:09:37.293734 functions.go:57: originalUrlInDB successfully started
+2024/10/01 17:09:37.299626 handler_api.go:25: apiUrlHandler successfully started
+2024/10/01 17:09:37.300034 functions.go:57: originalUrlInDB successfully started

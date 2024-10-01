@@ -1,0 +1,22 @@
+2024/10/01 16:39:01.082882 logger.go:26: initLogger successfully executed
+2024/10/01 16:39:01.083442 database.go:20: initDB successfully started
+2024/10/01 16:39:01.085026 database.go:44: initDB successfully executed
+2024/10/01 16:39:16.041538 main.go:52: indexUrlHandler successfully started
+2024/10/01 16:39:16.042136 main.go:56: indexUrlHandler successfully executed
+2024/10/01 16:39:33.283834 main.go:60: apiUrlHandler successfully started
+2024/10/01 16:39:33.284449 functions.go:57: originalUrlInDB successfully started
+2024/10/01 16:39:33.284980 functions.go:67: originalUrlInDB successfully executed with false and nil
+2024/10/01 16:39:33.284980 functions.go:32: generateShortUrl successfully started
+2024/10/01 16:39:33.285511 functions.go:50: generateShortUrl successfully executed
+2024/10/01 16:39:33.285511 functions.go:51: generateShortUrl generated new url - 2YE
+2024/10/01 16:39:33.288131 main.go:136: apiUrlHandler successfully executed
+2024/10/01 16:40:00.725067 main.go:140: cUrlHandler successfully started
+2024/10/01 16:40:00.725621 main.go:155: cUrlHandler successfully executed
+2024/10/01 16:40:12.244536 main.go:60: apiUrlHandler successfully started
+2024/10/01 16:40:12.244536 functions.go:57: originalUrlInDB successfully started
+2024/10/01 16:40:12.245060 functions.go:78: originalUrlInDB successfully executed with true and nil
+2024/10/01 16:40:12.245060 main.go:136: apiUrlHandler successfully executed
+2024/10/01 16:40:15.341544 main.go:140: cUrlHandler successfully started
+2024/10/01 16:40:15.341544 main.go:155: cUrlHandler successfully executed
+2024/10/01 16:41:39.614600 main.go:52: indexUrlHandler successfully started
+2024/10/01 16:41:39.615305 main.go:56: indexUrlHandler successfully executed

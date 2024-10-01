@@ -1,0 +1,17 @@
+2024/10/01 16:24:11.663746 logger.go:26: initLogger successfully executed
+2024/10/01 16:24:11.664279 database.go:20: initDB successfully started
+2024/10/01 16:24:11.666367 database.go:44: initDB successfully executed
+2024/10/01 16:24:12.675273 main.go:60: apiUrlHandler successfully started
+2024/10/01 16:24:12.676264 functions.go:27: generateShortUrl successfully started
+2024/10/01 16:24:12.676264 functions.go:45: generateShortUrl successfully executed
+2024/10/01 16:24:12.676264 functions.go:46: generateShortUrl generated new url - Z3p
+2024/10/01 16:24:12.680032 main.go:136: apiUrlHandler successfully executed
+2024/10/01 16:24:25.942283 main.go:60: apiUrlHandler successfully started
+2024/10/01 16:24:25.942808 functions.go:27: generateShortUrl successfully started
+2024/10/01 16:24:25.942808 functions.go:45: generateShortUrl successfully executed
+2024/10/01 16:24:25.942808 functions.go:46: generateShortUrl generated new url - hzg
+2024/10/01 16:24:25.948070 main.go:136: apiUrlHandler successfully executed
+2024/10/01 16:24:37.124755 main.go:60: apiUrlHandler successfully started
+2024/10/01 16:24:37.125759 main.go:136: apiUrlHandler successfully executed
+2024/10/01 16:24:48.904224 main.go:60: apiUrlHandler successfully started
+2024/10/01 16:24:48.904748 main.go:136: apiUrlHandler successfully executed

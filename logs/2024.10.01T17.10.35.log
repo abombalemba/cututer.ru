@@ -1,0 +1,34 @@
+2024/10/01 17:10:35.501414 logger.go:26: initLogger successfully executed
+2024/10/01 17:10:35.501414 database.go:20: initDB successfully started
+2024/10/01 17:10:35.504045 database.go:44: initDB successfully executed
+2024/10/01 17:11:02.617989 handler_index.go:14: indexUrlHandler successfully started
+2024/10/01 17:11:02.618518 handler_index.go:18: indexUrlHandler successfully executed
+2024/10/01 17:11:09.346878 handler_api.go:25: apiUrlHandler successfully started
+2024/10/01 17:11:09.347081 functions.go:57: originalUrlInDB successfully started
+2024/10/01 17:11:09.347635 functions.go:78: originalUrlInDB successfully executed with true and nil
+2024/10/01 17:11:09.348185 handler_api.go:101: apiUrlHandler successfully executed
+2024/10/01 17:11:19.219788 handler_api.go:25: apiUrlHandler successfully started
+2024/10/01 17:11:19.219992 functions.go:57: originalUrlInDB successfully started
+2024/10/01 17:11:19.219992 functions.go:78: originalUrlInDB successfully executed with true and nil
+2024/10/01 17:11:19.220510 handler_api.go:101: apiUrlHandler successfully executed
+2024/10/01 17:11:22.405891 handler_c.go:17: cUrlHandler successfully started
+2024/10/01 17:11:22.406531 handler_c.go:32: cUrlHandler successfully executed
+2024/10/01 17:11:50.504283 handler_api.go:25: apiUrlHandler successfully started
+2024/10/01 17:11:50.504283 functions.go:57: originalUrlInDB successfully started
+2024/10/01 17:11:50.504820 functions.go:67: originalUrlInDB successfully executed with false and nil
+2024/10/01 17:11:50.504820 functions.go:32: generateShortUrl successfully started
+2024/10/01 17:11:50.505354 functions.go:50: generateShortUrl successfully executed
+2024/10/01 17:11:50.505354 functions.go:51: generateShortUrl generated new url - EHG
+2024/10/01 17:11:50.508563 handler_api.go:101: apiUrlHandler successfully executed
+2024/10/01 17:11:53.671942 handler_c.go:17: cUrlHandler successfully started
+2024/10/01 17:11:53.672062 handler_c.go:32: cUrlHandler successfully executed
+2024/10/01 17:12:36.543339 handler_c.go:17: cUrlHandler successfully started
+2024/10/01 17:12:36.655534 handler_c.go:36: cUrlHandler not found url
+2024/10/01 17:12:48.583318 handler_index.go:14: indexUrlHandler successfully started
+2024/10/01 17:12:48.584384 handler_index.go:18: indexUrlHandler successfully executed
+2024/10/01 17:14:14.240817 handler_api.go:25: apiUrlHandler successfully started
+2024/10/01 17:14:14.241348 handler_api.go:29: apiUrlHandler failed because another method not allowed GET
+2024/10/01 17:14:15.706354 handler_api.go:25: apiUrlHandler successfully started
+2024/10/01 17:14:15.706864 handler_api.go:29: apiUrlHandler failed because another method not allowed GET
+2024/10/01 17:14:34.033179 handler_index.go:14: indexUrlHandler successfully started
+2024/10/01 17:14:34.034243 handler_index.go:18: indexUrlHandler successfully executed

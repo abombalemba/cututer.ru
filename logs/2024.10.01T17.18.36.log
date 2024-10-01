@@ -1,0 +1,20 @@
+2024/10/01 17:18:36.541716 logger.go:26: initLogger successfully executed
+2024/10/01 17:18:36.542232 database.go:20: initDB successfully started
+2024/10/01 17:18:36.544292 database.go:44: initDB successfully executed
+2024/10/01 17:19:24.060920 handler_api.go:23: apiUrlHandler successfully started
+2024/10/01 17:19:24.060920 functions.go:57: originalUrlInDB successfully started
+2024/10/01 17:19:24.061440 functions.go:78: originalUrlInDB successfully executed with true and nil
+2024/10/01 17:19:24.061959 handler_api.go:99: apiUrlHandler successfully executed
+2024/10/01 17:19:28.088171 handler_c.go:12: cUrlHandler successfully started
+2024/10/01 17:19:28.201251 handler_c.go:31: cUrlHandler not found url
+2024/10/01 17:19:38.295495 handler_api.go:23: apiUrlHandler successfully started
+2024/10/01 17:19:38.295495 functions.go:57: originalUrlInDB successfully started
+2024/10/01 17:19:38.296024 functions.go:67: originalUrlInDB successfully executed with false and nil
+2024/10/01 17:19:38.296024 functions.go:32: generateShortUrl successfully started
+2024/10/01 17:19:38.296541 functions.go:50: generateShortUrl successfully executed
+2024/10/01 17:19:38.296541 functions.go:51: generateShortUrl generated new url - U3Y
+2024/10/01 17:19:38.299661 handler_api.go:99: apiUrlHandler successfully executed
+2024/10/01 17:19:41.607984 handler_c.go:12: cUrlHandler successfully started
+2024/10/01 17:19:41.608521 handler_c.go:27: cUrlHandler successfully executed
+2024/10/01 17:20:10.367564 handler_index.go:10: indexUrlHandler successfully started
+2024/10/01 17:20:10.368084 handler_index.go:14: indexUrlHandler successfully executed

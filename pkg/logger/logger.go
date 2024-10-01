@@ -22,6 +22,8 @@ func InitLogger() {
 	}
 
 	logger = log.New(fileLog, "", log.Ldate | log.Ltime | log.Lmicroseconds | log.Lshortfile)
+
+	logger.Println("initLogger successfully executed")
 }
 
 func GetLogger() *log.Logger {

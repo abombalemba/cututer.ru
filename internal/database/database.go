@@ -3,7 +3,7 @@ package database
 import (
 	"log"
 	"database/sql"
-	
+
 	pkg_logger "cututer/pkg/logger"
 
 	_ "github.com/mattn/go-sqlite3"
@@ -46,4 +46,10 @@ func InitDB() {
 
 func GetDB() *sql.DB {
 	return db
+}
+
+func CloseDB() {
+	if err := db.Close(); err != nil {
+		logger.Fatalln("Error closing DB file: ", err)
+	} 
 }
